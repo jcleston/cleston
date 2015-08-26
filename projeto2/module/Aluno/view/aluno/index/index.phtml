@@ -1,0 +1,28 @@
+<?php
+$title = 'Alunos';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('aluno', array('action'=>'add'));?>">Cadastrar novo aluno</a>
+</p>
+
+<table class="table table-hover">
+<tr>
+    <th>Marca</th>
+    <th>Modelo</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($alunos as $aluno) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($aluno->nome);?></td>
+    <td><?php echo $this->escapeHtml($aluno->idade);?></td>
+    <td>
+        <a href="<?php echo $this->url('aluno',
+            array('action'=>'edit', 'id' => $aluno->id));?>">Editar</a>
+        <a href="<?php echo $this->url('aluno',
+            array('action'=>'delete', 'id' => $aluno->id));?>">Deletar</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
