@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -9,25 +10,26 @@
 
 namespace Application;
 
+use Aluno\Model\AlunoTable;
+use Application\Model\Usuario;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module
-{
-    public function onBootstrap(MvcEvent $e)
-    {
-        $eventManager        = $e->getApplication()->getEventManager();
+class Module {
+
+    public function onBootstrap(MvcEvent $e) {
+        $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
     }
 
-    public function getConfig()
-    {
+    public function getConfig() {
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function getAutoloaderConfig()
-    {
+    public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
@@ -36,4 +38,23 @@ class Module
             ),
         );
     }
+
+    public function getServiceConfig() {
+        return array(
+            'factories' => array(
+                'Application\Model\UsuarioTable' => function($sm) {
+                    $tableGateway = $sm->get('UsuarioTableGateway');
+                    $table = new AlunoTable($tableGateway);
+                    return $table;
+                },
+                'UsuarioTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Usuario());
+                    return new TableGateway('usuario', $dbAdapter, null, $resultSetPrototype);
+                },
+            ),
+        );
+    }
+
 }

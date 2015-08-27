@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -18,22 +19,19 @@ use Zend\Mvc\MvcEvent;
 use Aluno\Model\Aluno;
 use Aluno\Model\AlunoTable;
 
-class Module
-{
-    public function onBootstrap(MvcEvent $e)
-    {
-        $eventManager        = $e->getApplication()->getEventManager();
+class Module {
+
+    public function onBootstrap(MvcEvent $e) {
+        $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
     }
 
-    public function getConfig()
-    {
+    public function getConfig() {
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function getAutoloaderConfig()
-    {
+    public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
@@ -42,23 +40,23 @@ class Module
             ),
         );
     }
-    
-    public function getServiceConfig()
-    {
-    	return array(
-    			'factories' => array(
-    					'Aluno\Model\AlunoTable' =>  function($sm) {
-    						$tableGateway = $sm->get('AlunoTableGateway');
-    						$table = new AlunoTable($tableGateway);
-    						return $table;
-    					},
-    					'AlunoTableGateway' => function ($sm) {
-    						$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-    						$resultSetPrototype = new ResultSet();
-    						$resultSetPrototype->setArrayObjectPrototype(new Aluno());
-    						return new TableGateway('aluno', $dbAdapter, null, $resultSetPrototype);
-    					},
-    			),
-    	);
+
+    public function getServiceConfig() {
+        return array(
+            'factories' => array(
+                'Aluno\Model\AlunoTable' => function($sm) {
+                    $tableGateway = $sm->get('AlunoTableGateway');
+                    $table = new AlunoTable($tableGateway);
+                    return $table;
+                },
+                'AlunoTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Aluno());
+                    return new TableGateway('aluno', $dbAdapter, null, $resultSetPrototype);
+                },
+            ),
+        );
     }
+
 }
