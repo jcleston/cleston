@@ -34,7 +34,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Aluno\Controller\Index' => 'Aluno\Controller\IndexController'
+            'Aluno\Controller\Index' => 'Aluno\Controller\IndexController',
         ),
     ),
     'view_manager' => array(

@@ -1,16 +1,17 @@
 <?php
-$title = 'Alunos';
+$title = 'Aluno';
 $this->headTitle($title);
+
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <p>
-    <a href="<?php echo $this->url('aluno', array('action'=>'add'));?>">Cadastrar novo aluno</a>
+    <a href="<?php echo $this->basePath('aluno/index/add'); ?>">Cadastrar novo Aluno</a>
 </p>
 
 <table class="table table-hover">
 <tr>
-    <th>Marca</th>
-    <th>Modelo</th>
+    <th>Nome</th>
+    <th>Idade</th>
     <th>&nbsp;</th>
 </tr>
 <?php foreach ($alunos as $aluno) : ?>

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 return array(
     'router' => array(
         'routes' => array(
@@ -20,12 +13,6 @@ return array(
                     ),
                 ),
             ),
-            //
-            //
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
             'application' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -52,19 +39,6 @@ return array(
                     ),
                 ),
             ),
-            //Nova rota criada para usuario ////////////////////////////
-            'usuario' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/usuario',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller\Usuario',
-                        'controller' => 'Usuario',
-                        'action' => 'index',
-                    ),
-                ),
-            ),
-        ///////////////////////////////////////////////////////////
         ),
     ),
     'service_manager' => array(
@@ -89,7 +63,6 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Aula' => 'Application\Controller\AulaController',
             'Application\Controller\Usuario' => 'Application\Controller\UsuarioController'
         ),
     ),
