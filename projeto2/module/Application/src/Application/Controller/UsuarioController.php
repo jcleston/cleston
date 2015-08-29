@@ -18,7 +18,43 @@ class UsuarioController extends AbstractActionController {
                 )
         );
     }
-
+    
+    
+    
+    public function editAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (empty($id)) {
+            $id = $this->getRequest()->getPost('id');
+            if (empty($id)) {
+                return $this->redirect()->toUrl('add');
+            }
+        }
+        try {
+            $usuario = $this->getUsuarioTable()->getUsuario($id);
+        } catch (\Exception $ex) {
+            return $this->redirect()->toRoute('application', array(
+                        'action' => 'index'
+            ));
+        }
+        $form = new UsuarioForm();
+        $form->bind($usuario);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setInputFilter($usuario->getInputFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $this->getUsuarioTable()->salvarUsuario($form->getData());
+                return $this->redirect()->toRoute('application');
+            }
+        }
+        return array(
+            'id' => $id,
+            'form' => $form,
+        );
+    }
+    
+    
+    
     public function addAction() {
         $form = new UsuarioForm();
 

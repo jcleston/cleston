@@ -6,7 +6,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class Aluno implements InputFilterAwareInterface{
+class Aluno implements InputFilterAwareInterface {
 
     public $id;
     public $nome;
@@ -18,7 +18,7 @@ class Aluno implements InputFilterAwareInterface{
         $this->nome = (isset($data['nome'])) ? $data['nome'] : null;
         $this->idade = (isset($data['idade'])) ? $data['idade'] : null;
     }
-    
+
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new \Exception("Não validado");
     }
@@ -26,7 +26,6 @@ class Aluno implements InputFilterAwareInterface{
     public function getInputFilter() {
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
-
             $inputFilter->add(array(
                 'name' => 'id',
                 'required' => true,
@@ -34,7 +33,6 @@ class Aluno implements InputFilterAwareInterface{
                     array('name' => 'Int'),
                 ),
             ));
-
             $inputFilter->add(array(
                 'name' => 'nome',
                 'required' => true,
@@ -53,7 +51,6 @@ class Aluno implements InputFilterAwareInterface{
                     ),
                 ),
             ));
-
             $inputFilter->add(array(
                 'name' => 'idade',
                 'required' => true,
@@ -63,23 +60,19 @@ class Aluno implements InputFilterAwareInterface{
                 ),
                 'validators' => array(
                     array(
-                        'name'    => 'StringLength',
-                         'options' => array(
-                             'encoding' => 'UTF-8',
-                             'min'      => 1,
-                             'max'      => 100,
-                         ),
-                     ),
-                 ),
-             ));
-
-             $this->inputFilter = $inputFilter;
-         }
-
-         return $this->inputFilter;
-     }
-
-    
+                        'name' => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min' => 1,
+                            'max' => 100,
+                        ),
+                    ),
+                ),
+            ));
+            $this->inputFilter = $inputFilter;
+        }
+        return $this->inputFilter;
+    }
 
     public function getArrayCopy() {
         return array(

@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/module/Aluno/src/Aluno/Model/Aluno.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/module/Aluno/src/Aluno/Model/AlunoTable.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/module/Aluno/src/Aluno/Controller/IndexController.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/config/application.config.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/config/autoload/global.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/module/Aluno/view/aluno/index/index.phtml</file>
-            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/module/Aluno/config/module.config.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/config/autoload/local.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/module/Aluno/Module.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/module/Application/view/application/usuario/index.phtml</file>
+            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/module/Application/src/Application/Controller/UsuarioController.php</file>
+            <file>file:/C:/Program%20Files%20(x86)/Zend/Apache2/htdocs/projeto2/module/Application/src/Application/Model/Usuario.php</file>
         </group>
     </open-files>
 </project-private>
