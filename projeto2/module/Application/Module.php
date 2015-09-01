@@ -8,6 +8,8 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Application\Model\Usuario;
 use Application\Model\UsuarioTable;
+use Application\Model\Perfil;
+use Application\Model\PerfilTable;
 
 class Module {
 
@@ -34,6 +36,7 @@ class Module {
     public function getServiceConfig() {
         return array(
             'factories' => array(
+                //Usuário
                 'Application\Model\UsuarioTable' => function($sm) {
                     $tableGateway = $sm->get('UsuarioTableGateway');
                     $table = new UsuarioTable($tableGateway);
@@ -44,6 +47,18 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Usuario());
                     return new TableGateway('usuario', $dbAdapter, null, $resultSetPrototype);
+                },
+                //Perfil
+                'Application\Model\PerfilTable' => function($sm) {
+                    $tableGateway = $sm->get('PerfilTableGateway');
+                    $table = new PerfilTable($tableGateway);
+                    return $table;
+                },
+                'PerfilTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Perfil());
+                    return new TableGateway('perfil', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

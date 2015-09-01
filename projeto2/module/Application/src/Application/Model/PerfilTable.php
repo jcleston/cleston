@@ -2,17 +2,13 @@
 
 namespace Application\Model;
 
-//use Application\Model\Usuario;
-//use Exception;
-//use Zend\Db\TableGateway\TableGateway;
-
 use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
-use Application\Model\Usuario;
+use Application\Model\Perfil;
 
-class UsuarioTable {
+class PerfilTable {
 
     protected $tableGateway;
 
@@ -22,10 +18,11 @@ class UsuarioTable {
 
     public function fetchAll() {
         $resultSet = $this->tableGateway->select();
+        //$resultSet = $this->tableGateway->select(array('id' => 3));
         return $resultSet;
     }
 
-    public function getUsuario($id) {
+    public function getPerfil($id) {
         $id = (int) $id;
         $rowset = $this->tableGateway->select(array(
             'id' => $id
@@ -37,29 +34,26 @@ class UsuarioTable {
         return $row;
     }
 
-    public function salvarUsuario(Usuario $usuario) {
+    public function salvarPerfil(Perfil $perfil) {
         $data = array(
-            'nome' => $usuario->nome,
-            'email' => $usuario->email,
-            'senha' => $usuario->senha,
-            'telefone' => $usuario->telefone,
+            'nome' => $perfil->nome,
         );
 
-        $id = (int) $usuario->id;
+        $id = (int) $perfil->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
-            if ($this->getUsuario($id)) {
+            if ($this->getPerfil($id)) {
                 $this->tableGateway->update($data, array(
                     'id' => $id
                 ));
             } else {
-                throw new Exception('Não exisExceptionte registro com esse ID' . $id);
+                throw new Exception('Não existe Exception registro com esse ID' . $id);
             }
         }
     }
 
-    public function deletarUsuario($id) {
+    public function deletarPerfil($id) {
         $this->tableGateway->delete(array(
             'id' => $id
         ));

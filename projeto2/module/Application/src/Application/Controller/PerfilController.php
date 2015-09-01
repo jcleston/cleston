@@ -2,19 +2,19 @@
 
 namespace Application\Controller;
 
-use Application\Form\UsuarioForm;
-use Application\Model\Usuario;
+use Application\Form\PerfilForm;
+use Application\Model\Perfil;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class UsuarioController extends AbstractActionController {
+class PerfilController extends AbstractActionController {
 
-    private $usuarioTable;
+    private $perfilTable;
 
     public function indexAction() {
         return new ViewModel(
                 array(
-            "usuarios" => $this->getUsuarioTable()->fetchAll()
+            "perfis" => $this->getPerfilTable()->fetchAll()
                 )
         );
     }
@@ -28,22 +28,22 @@ class UsuarioController extends AbstractActionController {
             }
         }
         try {
-            $usuario = $this->getUsuarioTable()->getUsuario($id);
+            $perfil = $this->getPerfilTable()->getPerfil($id);
         } catch (\Exception $ex) {
             return $this->redirect()->toRoute('application', array(
                         'action' => 'index'
             ));
         }
-        $form = new UsuarioForm();
-        $form->bind($usuario);
+        $form = new PerfilForm();
+        $form->bind($perfil);
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setInputFilter($usuario->getInputFilter());
+            $form->setInputFilter($perfil->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $this->getUsuarioTable()->salvarUsuario($form->getData());
+                $this->getPerfilTable()->salvarPerfil($form->getData());
                 //return $this->redirect()->toRoute('application');
-                return $this->redirect()->toUrl("/application/usuario/index");
+                return $this->redirect()->toUrl("/application/perfil/index");
             }
         }
         return array(
@@ -53,30 +53,30 @@ class UsuarioController extends AbstractActionController {
     }
 
     public function addAction() {
-        $form = new UsuarioForm();
+        $form = new PerfilForm();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $usuario = new Usuario();
-            $form->setInputFilter($usuario->getInputFilter());
+            $perfil = new Perfil();
+            $form->setInputFilter($perfil->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $usuario->exchangeArray($form->getData());
-                $this->getUsuarioTable()->salvarUsuario($usuario);
+                $perfil->exchangeArray($form->getData());
+                $this->getPerfilTable()->salvarPerfil($perfil);
 
-                return $this->redirect()->toUrl("/application/usuario/index");
+                return $this->redirect()->toUrl("/application/perfil/index");
             }
         }
         return array('form' => $form);
     }
 
-    public function getUsuarioTable() {
-        if (!$this->usuarioTable) {
+    public function getPerfilTable() {
+        if (!$this->perfilTable) {
             $sm = $this->getServiceLocator();
-            $this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
+            $this->perfilTable = $sm->get('Application\Model\PerfilTable');
         }
-        return $this->usuarioTable;
+        return $this->perfilTable;
     }
 
     public function deleteAction() {
@@ -91,17 +91,15 @@ class UsuarioController extends AbstractActionController {
 
             if ($del == 'Sim') {
                 $id = (int) $request->getPost('id');
-                $this->getUsuarioTable()->deletarUsuario($id);
+                $this->getPerfilTable()->deletarPerfil($id);
             }
-
-            //return $this->redirect()->toUrl('index');
-            //return $this->redirect()->toRoute('application');
-            return $this->redirect()->toUrl("/application/usuario/index");
+            
+            return $this->redirect()->toUrl("/application/perfil/index");
         }
 
         return array(
             'id' => $id,
-            'usuario' => $this->getUsuarioTable()->getUsuario($id)
+            'perfil' => $this->getPerfilTable()->getPerfil($id)
         );
     }
 
