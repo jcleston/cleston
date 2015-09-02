@@ -30,11 +30,11 @@ CREATE TABLE `usuario` (
   `email` varchar(45) DEFAULT NULL,
   `senha` varchar(45) DEFAULT NULL,
   `telefone` varchar(45) DEFAULT NULL,
-  `perfil_id` int(11) NOT NULL,
+  `id_perfil` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_usuario_perfil_idx` (`perfil_id`),
-  CONSTRAINT `fk_usuario_perfil` FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  KEY `fk_usuario_perfil_idx` (`id_perfil`),
+  CONSTRAINT `fk_usuario_perfil` FOREIGN KEY (`id_perfil`) REFERENCES `perfil` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (10,'Cleston','cleston@hotmail.com','202cb962ac59075b964b07152d234b70','11111',0),(11,'2','2','202cb962ac59075b964b07152d234b70','2',0),(12,'asd','asd','202cb962ac59075b964b07152d234b70','asd',0),(14,'asd','asd','202cb962ac59075b964b07152d234b70','asd',0),(15,'asd','asd','202cb962ac59075b964b07152d234b70','asd',0),(16,'s','s','202cb962ac59075b964b07152d234b70','s',0),(17,'i','i','202cb962ac59075b964b07152d234b70','i',0);
+INSERT INTO `usuario` VALUES (10,'Cleston','cleston@hotmail.com','1','11111',3),(11,'2','2','202cb962ac59075b964b07152d234b70','2',5),(12,'asd','asd','202cb962ac59075b964b07152d234b70','asd',6),(14,'asd','asd','202cb962ac59075b964b07152d234b70','asd',5),(15,'asd','asd','202cb962ac59075b964b07152d234b70','asd',3),(16,'s','s','202cb962ac59075b964b07152d234b70','s',6),(17,'i','i','202cb962ac59075b964b07152d234b70','i',3),(18,'teste','teste','teste','teste',3);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-01 21:19:05
+-- Dump completed on 2015-09-02 20:48:32

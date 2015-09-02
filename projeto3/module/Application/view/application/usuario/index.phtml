@@ -12,6 +12,8 @@ $this->headTitle($title);
         <th>Nome</th>
         <th>Email</th>
         <th>Telefone</th>
+        <th>Perfil</th>
+        <th>&nbsp;</th>
         <th>&nbsp;</th>
     </tr>
     <?php foreach ($usuarios as $usuario) : ?>
@@ -19,6 +21,7 @@ $this->headTitle($title);
             <td><?php echo $this->escapeHtml($usuario->nome); ?></td>
             <td><?php echo $this->escapeHtml($usuario->email); ?></td>
             <td><?php echo $this->escapeHtml($usuario->telefone); ?></td>
+            <td><?php echo $this->escapeHtml($usuario->perfil->nome);?></td>
             <td>
                 <a href="<?php echo $this->basepath("application/usuario/edit/" . $usuario->id); ?>">Editar</a>
             </td>

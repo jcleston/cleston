@@ -21,6 +21,11 @@ class Module {
         //Garante a rota autenticada
         $application = $e->getApplication();
         $sm = $application->getServiceManager();
+        
+        //var_dump($application);exit;
+        
+        $GLOBALS['sm'] = $application->getServiceManager();
+        
         if (!$sm->get('AuthService')->hasIdentity()) {
             $e->getApplication()
                     ->getEventManager()

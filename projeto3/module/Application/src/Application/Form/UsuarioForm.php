@@ -6,6 +6,8 @@ use Zend\Form\Form;
 
 class UsuarioForm extends Form {
 
+    protected $perfilTable;
+
     public function __construct($name = null) {
         parent::__construct('usuario');
         $this->setAttribute('method', 'post');
@@ -15,7 +17,7 @@ class UsuarioForm extends Form {
             'name' => 'id',
             'type' => 'Hidden'
         ));
-        
+
         $this->add(array(
             'name' => 'nome',
             'type' => 'Text',
@@ -24,7 +26,7 @@ class UsuarioForm extends Form {
                 'placeholder' => 'Nome'
             )
         ));
-        
+
         $this->add(array(
             'name' => 'email',
             'type' => 'Text',
@@ -33,7 +35,7 @@ class UsuarioForm extends Form {
                 'placeholder' => 'Email'
             )
         ));
-        
+
         $this->add(array(
             'name' => 'senha',
             'type' => 'password',
@@ -42,7 +44,7 @@ class UsuarioForm extends Form {
                 'placeholder' => 'Senha'
             )
         ));
-        
+
         $this->add(array(
             'name' => 'telefone',
             'type' => 'text',
@@ -51,7 +53,15 @@ class UsuarioForm extends Form {
                 'placeholder' => 'Telefone'
             )
         ));
-        
+
+        $this->add(array(
+            'name' => 'id_perfil',
+            'type' => 'Select',
+            'options' => array(
+                'value_options' => $this->getValues()
+            )
+        ));
+
         $this->add(array(
             'name' => 'submit',
             'type' => 'Submit',
@@ -61,6 +71,24 @@ class UsuarioForm extends Form {
                 'class' => 'btn btn-default'
             )
         ));
+    }
+
+    public function getPerfilTable() {
+        if (!$this->perfilTable) {
+            $sm = $GLOBALS['sm'];
+            $this->perfilTable = $sm->get("Application/Model/PerfilTable");
+        }
+        return $this->perfilTable;
+    }
+
+    public function getValues() {
+        $valuesArray = array("" => "Selecione");
+        $perfis = $this->getPerfilTable()->fetchAll();
+
+        foreach ($perfis as $perfil) {
+            $valuesArray[$perfil->id] = $perfil->nome;
+        }
+        return $valuesArray;
     }
 
 }

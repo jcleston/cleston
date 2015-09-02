@@ -21,7 +21,12 @@ class UsuarioTable {
     }
 
     public function fetchAll() {
-        $resultSet = $this->tableGateway->select();
+
+        $select = new Select();
+        $select->from('usuario')
+                ->columns(array('*'))
+                ->join("perfil", "usuario.id_perfil = perfil.id", array("nome_perfil" => "nome"), Select::JOIN_LEFT);
+        $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet;
     }
 
@@ -43,6 +48,7 @@ class UsuarioTable {
             'email' => $usuario->email,
             'senha' => $usuario->senha,
             'telefone' => $usuario->telefone,
+            'id_perfil' => $usuario->perfil->id,
         );
 
         $id = (int) $usuario->id;
@@ -54,7 +60,7 @@ class UsuarioTable {
                     'id' => $id
                 ));
             } else {
-                throw new Exception('Não exisExceptionte registro com esse ID' . $id);
+                throw new Exception('Não existe Exception registro com esse ID' . $id);
             }
         }
     }

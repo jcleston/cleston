@@ -13,6 +13,7 @@ class Usuario {
     public $email;
     public $senha;
     public $telefone;
+    public $perfil;
     protected $inputFilter;
 
     public function exchangeArray($data) {
@@ -21,6 +22,11 @@ class Usuario {
         $this->email = (isset($data['email'])) ? $data['email'] : null;
         $this->senha = (isset($data['senha'])) ? $data['senha'] : null;
         $this->telefone = (isset($data['telefone'])) ? $data['telefone'] : null;
+        
+        $this->perfil   = new Perfil();
+        
+        $this->perfil->id = (isset($data['id_perfil'])) ? $data['id_perfil'] : null;
+        $this->perfil->nome = (isset($data['nome_perfil'])) ? $data['nome_perfil'] : null;
     }
     
     public function setInputFilter(InputFilterInterface $inputFilter) {
