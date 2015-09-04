@@ -1,0 +1,26 @@
+<?php
+$title = 'Perfil';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->basePath('application/perfil/add'); ?>">Cadastrar novo Perfil</a>
+</p>
+
+<table class="table table-hover">
+    <tr>
+        <th>Nome</th>        
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($perfis as $perfil) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($perfil->nome); ?></td>            
+            <td>
+                <a href="<?php echo $this->basepath("application/perfil/edit/" . $perfil->id); ?>">Editar</a>
+            </td>
+            <td>
+                <a href="<?php echo $this->basepath("application/perfil/delete/" . $perfil->id); ?>">Deletar</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
