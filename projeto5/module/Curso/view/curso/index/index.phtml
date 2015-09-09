@@ -1,0 +1,27 @@
+<?php
+$title = 'Curso';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->basePath('curso/index/add'); ?>">Cadastrar novo Curso</a>
+</p>
+
+<table class="table table-hover">
+    <tr>
+        <th>Nome</th>        
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($cursos as $curso) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($curso->nome); ?></td>            
+            <td>
+                <a href="<?php echo $this->basepath("curso/index/edit/" . $curso->id); ?>">Editar</a>
+            </td>
+            <td>
+                <a href="<?php echo $this->basepath("curso/index/delete/" . $curso->id); ?>">Deletar</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>

@@ -1,0 +1,30 @@
+<?php
+$title = 'Materia';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->basePath('materia/index/add'); ?>">Cadastrar nova Materia</a>
+</p>
+
+<table class="table table-hover">
+    <tr>
+        <th>Nome</th>
+        <th>Curso</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($materias as $materia) : ?>
+        <tr>
+            <!--para debugar \Zend\Debug\Debug::dump($materia); exit;-->
+            <td><?php echo $this->escapeHtml($materia->nome); ?></td>
+            <td><?php echo $this->escapeHtml($materia->curso->nome); ?></td>
+            <td>
+                <a href="<?php echo $this->basepath("materia/index/edit/" . $materia->id); ?>">Editar</a>
+            </td>
+            <td>
+                <a href="<?php echo $this->basepath("materia/index/delete/" . $materia->id); ?>">Deletar</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
